@@ -20,9 +20,7 @@ config :todo_app, TodoAppWeb.Endpoint,
   secret_key_base: "4dDMejtOEsaofpuaobDPZai9l2S90uRtqiEV2oICRZcyT5NqZ3wYDtRSMwwUrQI6",
   render_errors: [view: TodoAppWeb.ErrorView, accepts: ~w(json), layout: false],
   pubsub_server: TodoApp.PubSub,
-  live_view: [signing_salt: "UCgQE8nZ"],
-  reloadable_compilers: [:gettext, :phoenix, :elixir],
-  reloadable_apps: [:ui, :backend]
+  live_view: [signing_salt: "UCgQE8nZ"]
 
 # Configures Elixir's Logger
 config :logger, :console,

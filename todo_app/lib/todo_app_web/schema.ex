@@ -3,6 +3,7 @@ defmodule TodoAppWeb.Schema do
   alias TodoApp.Structs.Paginate
 
   import_types(TodoAppWeb.Schema.ContentTypes)
+  import_types(TodoAppWeb.Schema.AuthTypes)
 
   query do
     @desc "Get all todo list"
@@ -30,5 +31,8 @@ defmodule TodoAppWeb.Schema do
         {:ok, TodoApp.Services.Todo.create_task(args)}
       end)
     end
+
+    import_fields(:sign_up)
+    import_fields(:login)
   end
 end
