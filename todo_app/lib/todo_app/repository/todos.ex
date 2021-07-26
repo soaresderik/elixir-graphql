@@ -13,11 +13,9 @@ defmodule TodoApp.Repository.Todo do
     timestamps()
   end
 
-  def changeset(todo, attrs) do
+  def changeset(todo, attrs \\ %{}) do
     todo
     |> cast(attrs, [:title, :description])
     |> validate_required([:title, :description])
   end
-
-  import Ecto.Changeset
 end
