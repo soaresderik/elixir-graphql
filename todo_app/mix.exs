@@ -45,7 +45,9 @@ defmodule TodoApp.MixProject do
       {:plug_cowboy, "~> 2.0"},
       {:absinthe, "~> 1.5", override: true},
       {:absinthe_plug, "~> 1.5"},
-      {:phoenix_live_reload, "~> 1.3"}
+      {:phoenix_live_reload, "~> 1.3"},
+      {:bcrypt_elixir, "~> 2.3"},
+      {:guardian, "~> 2.2"}
     ]
   end
 

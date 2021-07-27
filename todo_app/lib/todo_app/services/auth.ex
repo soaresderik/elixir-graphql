@@ -1,8 +1,9 @@
 defmodule TodoApp.Services.Auth do
-  import Ecto.Query
+  # import Ecto.Query
 
   alias TodoApp.Repository.User
   alias TodoApp.Repo
+  alias TodoApp.Guardian
 
   def sign_up(args) do
     args
@@ -12,15 +13,16 @@ defmodule TodoApp.Services.Auth do
   end
 
   def login(args) do
-    User
-    |> select([:username, :password])
-    |> where(username: ^args.username)
-    |> where(password: ^args.password)
-    |> Repo.one()
-    |> handle_auth
+    with {:ok, token} <-
+           Guardian.authenticate(%{username: args.username, password: args.password}) do
+      {:ok, %{token: token}}
+    else
+      _ -> handle_auth(nil)
+    end
   end
 
   def handle_auth(%User{} = _), do: {:ok, true}
   def handle_auth({:ok, %User{}} = _), do: {:ok, true}
   def handle_auth({:error, result}), do: {:error, result}
+  def handle_auth(_), do: {:error, [:login, "Username or password are incorrect."]}
 end

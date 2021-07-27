@@ -18,16 +18,20 @@ defmodule TodoAppWeb.Schema.AuthTypes do
   end
 
   object :login do
-    field :login, :boolean do
+    field :login, :auth do
       arg(:username, :string)
       arg(:password, :string)
 
       resolve(fn _, args, _ ->
         case TodoApp.Services.Auth.login(args) do
-          {:ok, _} -> {:ok, true}
+          {:ok, auth} -> {:ok, auth}
           {:error, result} -> {:error, ErrorHandling.extract_error_msg(result)}
         end
       end)
     end
+  end
+
+  object :auth do
+    field :token, :string
   end
 end

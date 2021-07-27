@@ -1,10 +1,3 @@
-# This file is responsible for configuring your application
-# and its dependencies with the aid of the Mix.Config module.
-#
-# This configuration file is loaded before any dependency and
-# is restricted to this project.
-
-# General application configuration
 use Mix.Config
 
 config :todo_app,
@@ -32,6 +25,10 @@ config :phoenix, :json_library, Jason
 
 config :absinthe,
   log: false
+
+config :todo_app, TodoApp.Guardian,
+  issuer: "todo_app",
+  secret_key: "sFbROjM6xLzPdjalZAT9ifApzIzdsyuT0fZpXzVzEw4G5SkX3mvKj9NudWWUb9Uc"
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.

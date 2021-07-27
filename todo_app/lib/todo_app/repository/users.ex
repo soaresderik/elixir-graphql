@@ -19,6 +19,8 @@ defmodule TodoApp.Repository.User do
     %__MODULE__{}
     |> cast(params, @required_params)
     |> validate_required(@required_params)
+    |> validate_format(:username, ~r/^[a-z0-9.\_\-]+$/)
     |> unique_constraint(:username)
+    |> update_change(:password, &Bcrypt.hash_pwd_salt/1)
   end
 end
