@@ -2,9 +2,12 @@ defmodule TodoApp.Guardian do
   use Guardian, otp_app: :todo_app
   alias TodoApp.Services.User
 
-  def resource_from_claims(%{"sub" => id}) do
-    user = User.get_by(:id, id)
-    {:ok, user}
+  def resource_from_claims(claims) do
+    sub =
+      claims
+      |> Map.get("sub")
+
+    User.get_by!(:id, sub)
   rescue
     Ecto.NoResultsError -> {:error, :resource_not_found}
   end
@@ -16,7 +19,7 @@ defmodule TodoApp.Guardian do
   def authenticate(%{username: username, password: password}) do
     with {:ok, %{password: hash} = user} <- User.get_by(:username, username),
          true <- Bcrypt.verify_pass(password, hash),
-         {:ok, token, _claims} <- encode_and_sign(user) do
+         {:ok, token, _claims} <- encode_and_sign(user, %{}, ttl: {72, :hours}) do
       {:ok, token}
     else
       false -> {:error, [:unauthorized, "Please verify your credentials"]}

@@ -1,6 +1,4 @@
 defmodule TodoApp.Services.User do
-  import Ecto.Query
-
   alias TodoApp.Repo
   alias TodoApp.Repository.User
 
@@ -21,6 +19,13 @@ defmodule TodoApp.Services.User do
     case Repo.get_by(User, username: username) do
       nil -> {:error, [:user, "User not found"]}
       user -> {:ok, user}
+    end
+  end
+
+  def get_by!(:id, id) do
+    case Repo.get(User, id) do
+      nil -> [:user, "User not found"]
+      user -> user
     end
   end
 end

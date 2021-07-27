@@ -3,6 +3,7 @@ defmodule TodoAppWeb.Router do
 
   pipeline :api do
     plug :accepts, ["json"]
+    plug TodoApp.Context
   end
 
   scope "/api" do

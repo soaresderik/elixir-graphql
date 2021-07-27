@@ -1,6 +1,6 @@
 defmodule TodoAppWeb.Schema do
   use Absinthe.Schema
-  alias TodoApp.Structs.Paginate
+  alias TodoApp.Resolvers
 
   import_types(TodoAppWeb.Schema.ContentTypes)
   import_types(TodoAppWeb.Schema.AuthTypes)
@@ -11,13 +11,7 @@ defmodule TodoAppWeb.Schema do
       arg(:page, :integer)
       arg(:size, :integer)
 
-      resolve(fn _, args, _ ->
-        args =
-          %Paginate{}
-          |> struct(args)
-
-        {:ok, TodoApp.Services.Todo.list(args)}
-      end)
+      resolve(&Resolvers.Todo.list/3)
     end
   end
 
