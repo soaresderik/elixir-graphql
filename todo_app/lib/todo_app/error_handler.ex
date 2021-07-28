@@ -1,5 +1,5 @@
-defmodule TodoApp.ErrorHandling do
-  def extract_error_msg(%{errors: errors}) do
+defmodule TodoApp.ErrorHandler do
+  def parse(%{errors: errors}) do
     errors
     |> Enum.map(fn {field, {error, _details}} ->
       [
@@ -9,7 +9,7 @@ defmodule TodoApp.ErrorHandling do
     end)
   end
 
-  def extract_error_msg([field, message]) do
+  def parse([field, message]) do
     [
       field: field,
       message: message

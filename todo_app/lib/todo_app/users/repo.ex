@@ -1,6 +1,6 @@
-defmodule TodoApp.Services.User do
+defmodule TodoApp.User.Repo do
   alias TodoApp.Repo
-  alias TodoApp.Repository.User
+  alias TodoApp.User.Entity, as: UserEntity
 
   def list() do
     user = %{id: "#01", username: "André Soares"}
@@ -9,21 +9,21 @@ defmodule TodoApp.Services.User do
   end
 
   def get_by(:id, id) do
-    case Repo.get(User, id) do
+    case Repo.get(UserEntity, id) do
       nil -> {:error, [:user, "User not found"]}
       user -> {:ok, user}
     end
   end
 
   def get_by(:username, username) do
-    case Repo.get_by(User, username: username) do
+    case Repo.get_by(UserEntity, username: username) do
       nil -> {:error, [:user, "User not found"]}
       user -> {:ok, user}
     end
   end
 
   def get_by!(:id, id) do
-    case Repo.get(User, id) do
+    case Repo.get(UserEntity, id) do
       nil -> [:user, "User not found"]
       user -> user
     end

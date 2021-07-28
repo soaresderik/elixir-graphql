@@ -9,9 +9,9 @@ defmodule TodoAppWeb.Router do
   scope "/api" do
     pipe_through :api
 
-    forward "/graphiql", Absinthe.Plug.GraphiQL, schema: TodoAppWeb.Schema
+    forward "/graphiql", Absinthe.Plug.GraphiQL, schema: TodoApp.Schema
 
-    forward "/", Absinthe.Plug, schema: TodoAppWeb.Schema
+    forward "/", Absinthe.Plug, schema: TodoApp.Schema
   end
 
   if Mix.env() in [:dev, :test] do

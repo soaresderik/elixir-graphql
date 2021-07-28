@@ -1,4 +1,4 @@
-defmodule TodoApp.Repository.User do
+defmodule TodoApp.User.Entity do
   use Ecto.Schema, warn: false
 
   import Ecto.Changeset
