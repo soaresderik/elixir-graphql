@@ -4,6 +4,10 @@ defmodule TodoApp.Todos.Types do
   alias TodoApp.Todos.Resolvers, as: TodosResolvers
   alias TodoApp.Todos.Services, as: TodosServices
 
+  def key(k) do
+    fn parent, _, _ -> {:ok, Map.get(parent, k)} end
+  end
+
   object :todo_queries do
     @desc "Get all todo list"
     field :todos, list_of(:todo) do
@@ -29,11 +33,7 @@ defmodule TodoApp.Todos.Types do
     field :description, :string
     field :done, :boolean
 
-    field :owner, :user do
-      resolve(fn _, _, _ ->
-        {:ok, true}
-      end)
-    end
+    field :owner, :user, resolve: key(:user)
   end
 
   object :user do

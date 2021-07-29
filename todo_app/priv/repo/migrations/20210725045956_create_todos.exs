@@ -1,7 +1,7 @@
 defmodule TodoApp.Repo.Migrations.CreateTodos do
   use Ecto.Migration
 
-  def change do
+  def up do
     create table(:todos) do
       add :title, :string
       add :description, :string
@@ -10,5 +10,9 @@ defmodule TodoApp.Repo.Migrations.CreateTodos do
       timestamps()
     end
 
+  end
+
+  def down do
+    drop_if_exists table(:todos)
   end
 end

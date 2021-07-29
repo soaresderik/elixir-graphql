@@ -1,9 +1,8 @@
 defmodule TodoApp.User.Entity do
-  use Ecto.Schema, warn: false
+  use TodoApp.BaseSchema
 
   import Ecto.Changeset
 
-  @primary_key {:id, :binary_id, autogenerate: true}
   @required_params [:username, :password]
 
   @derive {Jason.Encoder, only: @required_params ++ [:id]}

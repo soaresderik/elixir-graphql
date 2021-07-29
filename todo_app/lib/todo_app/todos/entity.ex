@@ -1,14 +1,14 @@
 defmodule TodoApp.Todo.Entity do
-  use Ecto.Schema, warn: false
+  use TodoApp.BaseSchema
 
   import Ecto.Changeset
-
-  @primary_key {:id, :binary_id, autogenerate: true}
 
   schema "todos" do
     field :title, :string
     field :description, :string
     field :done, :boolean
+
+    belongs_to :user, TodoApp.User.Entity
 
     timestamps()
   end
