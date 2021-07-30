@@ -1,15 +1,17 @@
 defmodule TodoApp.User.Entity do
   use TodoApp.BaseSchema
 
+  import TodoApp.Shared.Permissions, only: [permissions: 0]
   import Ecto.Changeset
 
-  @required_params [:username, :password]
+  @required_params [:username, :password, :permissions]
 
   @derive {Jason.Encoder, only: @required_params ++ [:id]}
 
   schema "users" do
     field :username, :string
     field :password, :string
+    field :permissions, {:array, Ecto.Enum}, values: permissions()
 
     timestamps()
   end

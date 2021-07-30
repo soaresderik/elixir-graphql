@@ -28,5 +28,5 @@ services:
         ports:
             - 5432:5432
         volumes:
-            - ./pg-data:/var/lib/postgresql/data
-            - ./postgres.conf:/etc/postgresql/postgres.conf
+            - ../pg-data:/var/lib/postgresql/data
+            - ../postgres.conf:/etc/postgresql/postgres.conf

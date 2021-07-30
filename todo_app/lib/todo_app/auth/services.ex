@@ -6,7 +6,7 @@ defmodule TodoApp.Auth.Services do
   alias TodoApp.Guardian
 
   def sign_up(args) do
-    args
+    Map.put_new(args, :permissions, [:create_task, :current_user_access])
     |> UserEntity.changeset()
     |> Repo.insert()
     |> handle_auth()

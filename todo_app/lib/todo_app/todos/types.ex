@@ -49,7 +49,7 @@ defmodule TodoApp.Todos.Types do
           %Paginate{}
           |> struct(args)
 
-        {:ok, TodosServices.list(args)}
+        {:ok, TodosServices.list(:list_all_tasks, args)}
       end)
     end
   end

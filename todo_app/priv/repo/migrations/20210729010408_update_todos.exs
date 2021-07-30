@@ -1,7 +1,7 @@
 defmodule TodoApp.Repo.Migrations.UpdateTodos do
   use Ecto.Migration
 
-  def change do
+  def up do
     alter table(:todos) do
       add_if_not_exists :user_id, references(:users)
     end
