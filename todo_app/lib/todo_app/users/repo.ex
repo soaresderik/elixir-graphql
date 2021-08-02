@@ -8,15 +8,10 @@ defmodule TodoApp.User.Repo do
     user
   end
 
-  def get_by(:id, id) do
-    case Repo.get(UserEntity, id) do
-      nil -> {:error, [:user, "User not found"]}
-      user -> {:ok, user}
-    end
-  end
+  def get_by(key, value) do
+    params = Keyword.put([], key, value)
 
-  def get_by(:username, username) do
-    case Repo.get_by(UserEntity, username: username) do
+    case Repo.get_by(UserEntity, params) do
       nil -> {:error, [:user, "User not found"]}
       user -> {:ok, user}
     end

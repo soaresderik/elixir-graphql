@@ -1,12 +1,8 @@
 defmodule TodoApp.Todos.Types do
-  use Absinthe.Schema.Notation
-  alias TodoApp.Structs.Paginate
-  alias TodoApp.Todos.Resolvers, as: TodosResolvers
-  alias TodoApp.Todos.Services, as: TodosServices
+  import TodoApp.Shared.FieldRenamer
 
-  def key(k) do
-    fn parent, _, _ -> {:ok, Map.get(parent, k)} end
-  end
+  use Absinthe.Schema.Notation
+  alias TodoApp.Todos.Resolvers, as: TodosResolvers
 
   object :todo_queries do
     @desc "Get all todo list"
@@ -32,25 +28,8 @@ defmodule TodoApp.Todos.Types do
     field :title, :string
     field :description, :string
     field :done, :boolean
+    field :created_at, :string, resolve: rename(:inserted_at)
 
-    field :owner, :user, resolve: key(:user)
-  end
-
-  object :user do
-    field :id, :id
-    field :username, :string
-
-    field :todos, list_of(:todo) do
-      arg(:page, :integer)
-      arg(:size, :integer)
-
-      resolve(fn _, args, _ ->
-        args =
-          %Paginate{}
-          |> struct(args)
-
-        {:ok, TodosServices.list(:list_all_tasks, args)}
-      end)
-    end
+    field :owner, :user, resolve: rename(:user)
   end
 end

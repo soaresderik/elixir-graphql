@@ -1,4 +1,4 @@
-defmodule TodoAppWeb.Auth.Types do
+defmodule TodoApp.Auth.Types do
   use Absinthe.Schema.Notation
 
   alias TodoApp.Auth.Resolvers, as: AuthResolvers
