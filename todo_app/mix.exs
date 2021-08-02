@@ -47,7 +47,9 @@ defmodule TodoApp.MixProject do
       {:absinthe_plug, "~> 1.5"},
       {:phoenix_live_reload, "~> 1.3"},
       {:bcrypt_elixir, "~> 2.3"},
-      {:guardian, "~> 2.2"}
+      {:guardian, "~> 2.2"},
+      {:ex_machina, "~> 2.7.0"},
+      {:faker, "~> 0.16", only: :test}
     ]
   end
 
